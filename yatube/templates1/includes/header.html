@@ -1,0 +1,28 @@
+<!-- templates/includes/header.html -->
+  <head>    
+    
+    <!-- Загружаем фав-иконки -->
+    {% load static %}
+    <link rel="icon" href={% static 'img/fav/fav.ico' %}>
+    <link rel="apple-touch-icon" sizes="180x180" href={% static 'img/fav/apple-touch-icon.png' %}>
+    <link rel="icon" type="image/png" sizes="32x32" href={% static 'img/fav/favicon-32x32.png' %}>
+    <link rel="icon" type="image/png" sizes="16x16" href={% static 'img/fav/favicon-16x16.png' %}>
+    <meta name="msapplication-TileColor" content="#000">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+    <header>
+      <!-- Использованы классы бустрапа для создания типовой навигации с логотипом -->
+      <!-- В дальнейшем тут будет создано полноценное меню -->
+      <nav class="navbar navbar-light" style="background-color: lightskyblue">
+        <div class="container">
+          
+          <!-- Делает Yatube гиперссылкой на глвную страницу, где posts пространство имен и а main имя-->
+          <a class="navbar-brand" href= "{% url 'posts:main'  %}"
+          <link rel="icon" href={% static 'img/fav/fav.ico' %}> <!-- Картинка добавлена криво, переделать!!1 -->
+            <img src={% static 'img/logo.png' %} width="30" height="30" class="d-inline-block align-top" alt="">
+            <!-- тег span используется для добавления нужных стилей отдельным участкам текста -->
+            <span style="color:red"><b>Ya</span>tube</b>
+          </a>
+        </div>
+      </nav>      
+    </header>

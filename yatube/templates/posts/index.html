@@ -1,0 +1,19 @@
+<!-- templates/posts/index.html -->
+{% extends 'base.html' %}
+<!DOCTYPE html> 
+<html lang="ru">
+  <head>
+    <title>{{title}}</title>
+  </head>
+  {% block content %}
+  <body>
+    <h1>{{text}}
+    <h2>
+    <a href="{% url 'posts:group_posts'   %}">
+      Подробная информация
+    </a> 
+  </h2>
+
+  </body>
+  {% endblock %}
+</html> 

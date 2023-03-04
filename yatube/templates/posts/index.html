@@ -1,19 +1,32 @@
 <!-- templates/posts/index.html -->
 {% extends 'base.html' %}
-<!DOCTYPE html> 
-<html lang="ru">
-  <head>
-    <title>{{title}}</title>
-  </head>
-  {% block content %}
-  <body>
-    <h1>{{text}}
-    <h2>
-    <a href="{% url 'posts:group_posts'   %}">
-      Подробная информация
-    </a> 
-  </h2>
-
-  </body>
-  {% endblock %}
-</html> 
+{% block content %}
+<head>
+  <title>{{title}}</title>
+</head>
+<body>
+  <h1>{{text}}</h1>
+  <a href="{% url 'posts:groups' %}"> Группы проекта Yatube </a>
+  <hr>
+  <!-- Вывод постов -->
+  {% for post in posts %}
+    <ul>
+      <li>
+        Автор: {{ post.author.get_full_name }}
+      </li>
+      <li>
+        Дата публикации: {{ post.pub_date|date:"d E Y" }}
+      </li>
+      {% if post.group %}   
+        <li>
+          <a href="{% url 'posts:group_list' post.group.slug %}"> все записи группы 
+            <b>{{ post.group.title }}</b></a>
+        </li>
+      {% endif %} 
+    </ul>
+    <p>{{ post.text }}</p>
+    {% if not forloop.last %}<hr>{% endif %}
+  {% endfor %}
+  <hr>
+</body>
+{% endblock %}

@@ -1,12 +1,21 @@
 <!-- templates/posts/index.html -->
-<!DOCTYPE html> 
-<html lang="ru">
-  <head>
-  </head>
-  {% extends 'base.html' %}
-  {% block content %}
-  <body>
-    <h1>{{text}}</h1>
-  </body>
-  {% endblock %}
-</html> 
+{% extends 'base.html' %}
+{% block content %}
+<head>
+  <title>{{title}}</title>
+</head>
+<body>
+  <h2><b>Список групп:</b></h2>
+  {% for group in groups %}
+    <ul>
+      <li>
+        <h5>
+          <a href="{% url 'posts:group_list' group.slug %}">{{ group.title }} </a>
+        </h5>
+      </li>
+    </ul>
+    <p>{{ group.description }}</p>
+    {% if not forloop.last %}<hr>{% endif %}
+  {% endfor %} 
+</body>
+{% endblock %}

@@ -7,7 +7,18 @@
 * Комментирование постов;
 * Подписки на любимых авторов.
 ### Технологии
-Python, Django
+Python, Django, SQL, HTML
+* Пагинация страниц
+* Кеширование
+
+### Скриншоты
+
+<img src="preview/1.PNG" width="300"/>&nbsp;
+
+<img src="preview/2.PNG" width="300"/>&nbsp;
+
+<img src="preview/3.PNG" width="300"/>&nbsp;
+
 ### Запуск проекта в dev-режиме
 - Клонировать репозиторий
 

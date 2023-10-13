@@ -1,32 +1,15 @@
 <!-- templates/posts/index.html -->
 {% extends 'base.html' %}
+{% load cache %}
+{% block title %}Последние обновления на сайте{% endblock %}
 {% block content %}
-<head>
-  <title>{{title}}</title>
-</head>
-<body>
-  <h1>{{text}}</h1>
-  <a href="{% url 'posts:groups' %}"> Группы проекта Yatube </a>
-  <hr>
-  <!-- Вывод постов -->
-  {% for post in posts %}
-    <ul>
-      <li>
-        Автор: {{ post.author.get_full_name }}
-      </li>
-      <li>
-        Дата публикации: {{ post.pub_date|date:"d E Y" }}
-      </li>
-      {% if post.group %}   
-        <li>
-          <a href="{% url 'posts:group_list' post.group.slug %}"> все записи группы 
-            <b>{{ post.group.title }}</b></a>
-        </li>
-      {% endif %} 
-    </ul>
-    <p>{{ post.text }}</p>
-    {% if not forloop.last %}<hr>{% endif %}
-  {% endfor %}
-  <hr>
-</body>
+  <h1>Главная страница</h1>
+    {% include 'includes/switcher.html' with index=True %}
+    {% cache 20 index page_obj.number %}
+      {% for post in page_obj %}
+        {% include 'includes/post.html' with group_name=True %}
+        {% if not forloop.last %}<hr>{% endif %}
+      {% endfor %}
+    {% endcache %}
+  {% include 'posts/includes/paginator.html' %}
 {% endblock %}

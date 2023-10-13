@@ -1,0 +1,35 @@
+<!-- templates/posts/profile.html -->
+{% extends 'base.html' %}
+{% load cache %}
+{% block title %}Профайл пользователя {{ author.username }} {% endblock %}
+{% block content %}
+  <div class="mb-5">
+    <h1>Все посты пользователя {{ author.username }}</h1>
+    <h3>Всего постов: {{ page_obj.paginator.count }}</h3>   
+    {% if author.username != user.username %}
+      {% if following %}
+      <a
+        class="btn btn-lg btn-light"
+        href="{% url 'posts:profile_unfollow' author.username %}" role="button"
+      >
+        Отписаться
+      </a>
+      {% else %}
+        <a
+          class="btn btn-lg btn-primary"
+          href="{% url 'posts:profile_follow' author.username %}" role="button"
+        >
+          Подписаться
+        </a>
+    {% endif %}
+  {% endif %}
+  <hr>
+  {% cache 20 profile page_obj.number %}
+    {% for post in page_obj %}
+      {% include 'includes/post.html' with group_name=True profile=True %}
+      {% if not forloop.last %}<hr>{% endif %}
+    {% endfor %}
+  {% endcache %}
+  {% include 'posts/includes/paginator.html' %}
+  </div>
+{% endblock %}

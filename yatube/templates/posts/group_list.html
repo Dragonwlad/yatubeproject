@@ -1,31 +1,12 @@
 <!-- templates/posts/index.html -->
-<!DOCTYPE html> 
-<html lang="ru">
-  {% extends 'base.html' %}
-  {% block content %}
-    <head>
-      <title>{{title}}</title>
-      <h2>Группа <b>{{ group.title }} </b></h2>
-      <b>Описание</b>
-      {{ group.description }}
-        </a> 
-      </head>
-          <hr>
-          <body>
-            <!-- Вывод постов -->
-            {% for post in posts %}
-              <ul>
-                <li>
-                  Автор: {{ post.author.get_full_name }}
-                </li>
-                <li>
-                  Дата публикации: {{ post.pub_date|date:"d E Y" }}
-                </li>
-              </ul>
-              <p>{{ post.text }}</p>
-              {% if not forloop.last %}<hr>{% endif %}
-            {% endfor %} 
-            <hr>
-      </body>
-  {% endblock %}
-</html> 
+{% extends 'base.html' %}
+{% block title %}Записи сообщества{% endblock %}
+{% block content %}
+  <h1>{{ group.title }}</h1>
+  <p>{{ group.description|linebreaksbr }}</p>
+  {% for post in page_obj %}
+    {% include 'includes/post.html' %}
+    {% if not forloop.last %}<hr>{% endif %}
+  {% endfor %}
+  {% include 'posts/includes/paginator.html' %}
+{% endblock %}

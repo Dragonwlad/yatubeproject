@@ -1,0 +1,19 @@
+<!-- templates/about/author.html -->
+{% extends "base.html" %}
+{% block title %}Об авторе проекта{% endblock %}
+{% load static %}
+{% block content %}
+  <h1>Привет, я автор</h1>
+  <p>
+    Тут я размещу информацию о себе, используя свои умения верстать.
+    Картинки, блоки, элементы бустрап. А может быть, просто напишу несколько абзацев текста. 
+  </p>
+  <!-- Загрузка тегов библиотеки в шаблон -->
+{% load thumbnail %}
+
+<!-- Пример использования тега для пропорционального уменьшения и обрезки -->
+<!-- картинки до размера 100x100px с центрированием -->
+{% thumbnail item.image "100x100" crop="center" as im %}
+  <img src="{% static 'img/vodopad.jpg' %}" width="{{ im.width }}" height="{{ im.height }}">
+{% endthumbnail %} 
+{% endblock %} 

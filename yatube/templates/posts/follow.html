@@ -1,0 +1,15 @@
+<!-- templates/posts/index.html -->
+{% extends 'base.html' %}
+{% load cache %}
+{% block title %}Последние обновления на сайте{% endblock %}
+{% block content %}
+  <h1>Подписки</h1>
+  {% include 'includes/switcher.html' with follow=True %}
+  {% cache 20 follow page_obj.number %}
+    {% for post in page_obj %}
+      {% include 'includes/post.html' with group_name=True %}
+      {% if not forloop.last %}<hr>{% endif %}
+    {% endfor %}
+  {% endcache %}
+  {% include 'posts/includes/paginator.html' %}
+{% endblock %}
